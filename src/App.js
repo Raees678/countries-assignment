@@ -8,13 +8,20 @@ class App extends React.Component {
     super(props);
     this.state = {
       searchText: "",
+      countriesMatched: [],
+      countriesMatchedLoading: false,
+      showingModal: false,
+      modalCountryObject: null,
     };
 
     this.handleSearchTextChange = this.handleSearchTextChange.bind(this);
     this.getCountriesMatched = this.getCountriesMatched.bind(this);
+
     this.countries = require("../node_modules/country-json/src/country-by-capital-city.json");
+    this.rateLimit = 1000;
     this.rateLimited = false;
     this.updatedStringDuringRateLimit = null;
+    this.searchDelay = 1000;
   }
 
   handleSearchTextChange(searchText) {
@@ -28,24 +35,39 @@ class App extends React.Component {
           newThis.updatedStringDuringRateLimit = null;
           newThis.handleSearchTextChange(updatedString);
         }
-      }, 1000);
+      }, this.rateLimit);
       this.setState({
         searchText: searchText,
       });
+      this.getCountriesMatched(searchText);
     } else {
       this.updatedStringDuringRateLimit = searchText;
     }
   }
 
-  getCountriesMatched() {
-    if (this.state.searchText !== "") {
-      var newThis = this;
-      return this.countries.filter(function (countryObject) {
-        return countryObject.country.toLowerCase().includes(newThis.state.searchText.toLowerCase());
-      });
-    } else {
-      return [];
-    }
+  getCountriesMatched(searchText) {
+    this.setState({
+      countriesMatched: [],
+      countriesMatchedLoading: true,
+    });
+    var newThis = this;
+    setTimeout(function () {
+      if (searchText !== "") {
+        let countriesMatched = newThis.countries.filter(function (countryObject) {
+          return countryObject.country.toLowerCase().includes(searchText.toLowerCase());
+        });
+
+        newThis.setState({
+          countriesMatched: countriesMatched,
+          countriesMatchedLoading: false,
+        });
+      } else {
+        newThis.setState({
+          countriesMatched: [],
+          countriesMatchedLoading: false,
+        });
+      }
+    }, this.searchDelay);
   }
 
   render() {
@@ -55,7 +77,10 @@ class App extends React.Component {
           <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500&display=swap" rel="stylesheet" />
           <div id="title">Country Search</div>
           <SearchBox searchText={this.state.searchText} onSearchTextChange={this.handleSearchTextChange}></SearchBox>
-          <SearchResultsBox countriesMatched={this.getCountriesMatched()}></SearchResultsBox>
+          <SearchResultsBox
+            countriesMatchedLoading={this.state.countriesMatchedLoading}
+            countriesMatched={this.state.countriesMatched}
+          ></SearchResultsBox>
         </div>
       </div>
     );

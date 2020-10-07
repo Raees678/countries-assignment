@@ -4,7 +4,7 @@ body,
 #root > div {
   height: 100%;
   margin: 0;
-  background-image: linear-gradient(#ffc300, #f1c40f);
+  background-image: linear-gradient(#ffc300, #c49d03);
 }
 
 body {

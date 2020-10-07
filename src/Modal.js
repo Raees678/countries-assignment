@@ -1,8 +1,7 @@
 import React from "react";
-import SearchResult from "./SearchResult";
-import "./SearchResultsBox.css";
+import "./Modal.css";
 
-class SearchResultsBox extends React.Component {
+class Modal extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -27,4 +26,4 @@ class SearchResultsBox extends React.Component {
   }
 }
 
-export default SearchResultsBox;
+export default Modal;
