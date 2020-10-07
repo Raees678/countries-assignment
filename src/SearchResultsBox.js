@@ -8,8 +8,9 @@ class SearchResultsBox extends React.Component {
   }
 
   render() {
+    var height = 0;
     return (
-      <div id="search-results-box">
+      <div id="search-results-box" ref={this.searchResultsBoxRef}>
         {this.props.countriesMatched.map(function (countryObject) {
           return <SearchResult key={countryObject.country} countryName={countryObject.country}></SearchResult>;
         })}

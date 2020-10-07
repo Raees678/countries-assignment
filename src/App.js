@@ -13,19 +13,35 @@ class App extends React.Component {
     this.handleSearchTextChange = this.handleSearchTextChange.bind(this);
     this.getCountriesMatched = this.getCountriesMatched.bind(this);
     this.countries = require("../node_modules/country-json/src/country-by-capital-city.json");
+    this.rateLimited = false;
+    this.updatedStringDuringRateLimit = null;
   }
 
   handleSearchTextChange(searchText) {
-    this.setState({
-      searchText: searchText,
-    });
+    if (this.rateLimited === false) {
+      this.rateLimited = true;
+      var newThis = this;
+      setTimeout(function () {
+        newThis.rateLimited = false;
+        if (newThis.updatedStringDuringRateLimit !== null) {
+          const updatedString = newThis.updatedStringDuringRateLimit;
+          newThis.updatedStringDuringRateLimit = null;
+          newThis.handleSearchTextChange(updatedString);
+        }
+      }, 1000);
+      this.setState({
+        searchText: searchText,
+      });
+    } else {
+      this.updatedStringDuringRateLimit = searchText;
+    }
   }
 
   getCountriesMatched() {
     if (this.state.searchText !== "") {
       var newThis = this;
       return this.countries.filter(function (countryObject) {
-        return countryObject.country.includes(newThis.state.searchText);
+        return countryObject.country.toLowerCase().includes(newThis.state.searchText.toLowerCase());
       });
     } else {
       return [];

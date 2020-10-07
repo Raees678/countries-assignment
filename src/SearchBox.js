@@ -14,7 +14,8 @@ class SearchBox extends React.Component {
   render() {
     return (
       <div id="search-box">
-        <form id="search-box-form-div">
+        <form autoComplete="off" id="search-box-form-div">
+          <input autoComplete="false" name="hidden" type="text" style={{ display: "none" }}></input>
           <input
             id="search-box-form-div-input"
             placeholder="Enter a country to get started"
