@@ -4,23 +4,21 @@ import "./Modal.css";
 class Modal extends React.Component {
   constructor(props) {
     super(props);
+    this.handleCloseButtonClick = this.handleCloseButtonClick.bind(this);
+  }
+
+  handleCloseButtonClick(event) {
+    this.props.onCloseButtonClick();
   }
 
   render() {
-    var height = 0;
-
-    if (this.props.countriesMatchedLoading === true) {
-      return (
-        <div id="search-results-box" ref={this.searchResultsBoxRef}>
-          <div className="spinner"></div>
-        </div>
-      );
-    }
     return (
-      <div id="search-results-box" ref={this.searchResultsBoxRef}>
-        {this.props.countriesMatched.map(function (countryObject) {
-          return <SearchResult key={countryObject.country} countryName={countryObject.country}></SearchResult>;
-        })}
+      <div id="modal">
+        <div id="modal-box">
+          <p className="title-text">{"Country: " + this.props.countryObject.country}</p>
+          <p>{this.props.countryObject.city !== null ? "Capital: " + this.props.countryObject.city : "No capital"}</p>
+          <button onClick={this.handleCloseButtonClick}>Close</button>
+        </div>
       </div>
     );
   }

@@ -1,5 +1,6 @@
 import React from "react";
 import "./App.css";
+import Modal from "./Modal";
 import SearchBox from "./SearchBox";
 import SearchResultsBox from "./SearchResultsBox";
 
@@ -15,6 +16,8 @@ class App extends React.Component {
     };
 
     this.handleSearchTextChange = this.handleSearchTextChange.bind(this);
+    this.handleSearchResultClick = this.handleSearchResultClick.bind(this);
+    this.handleCloseButtonClick = this.handleCloseButtonClick.bind(this);
     this.getCountriesMatched = this.getCountriesMatched.bind(this);
 
     this.countries = require("../node_modules/country-json/src/country-by-capital-city.json");
@@ -43,6 +46,20 @@ class App extends React.Component {
     } else {
       this.updatedStringDuringRateLimit = searchText;
     }
+  }
+
+  handleSearchResultClick(countryObject) {
+    this.setState({
+      showingModal: true,
+      modalCountryObject: countryObject,
+    });
+  }
+
+  handleCloseButtonClick() {
+    this.setState({
+      showingModal: false,
+      modalCountryObject: null,
+    });
   }
 
   getCountriesMatched(searchText) {
@@ -78,10 +95,14 @@ class App extends React.Component {
           <div id="title">Country Search</div>
           <SearchBox searchText={this.state.searchText} onSearchTextChange={this.handleSearchTextChange}></SearchBox>
           <SearchResultsBox
+            onSearchResultClick={this.handleSearchResultClick}
             countriesMatchedLoading={this.state.countriesMatchedLoading}
             countriesMatched={this.state.countriesMatched}
           ></SearchResultsBox>
         </div>
+        {this.state.showingModal === true && (
+          <Modal countryObject={this.state.modalCountryObject} onCloseButtonClick={this.handleCloseButtonClick}></Modal>
+        )}
       </div>
     );
   }

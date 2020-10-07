@@ -16,14 +16,21 @@ class SearchResultsBox extends React.Component {
           <div className="spinner"></div>
         </div>
       );
+    } else {
+      return (
+        <div id="search-results-box" ref={this.searchResultsBoxRef}>
+          {this.props.countriesMatched.map(function (countryObject) {
+            return (
+              <SearchResult
+                onSearchResultClick={this.props.onSearchResultClick}
+                key={countryObject.country}
+                countryObject={countryObject}
+              ></SearchResult>
+            );
+          }, this)}
+        </div>
+      );
     }
-    return (
-      <div id="search-results-box" ref={this.searchResultsBoxRef}>
-        {this.props.countriesMatched.map(function (countryObject) {
-          return <SearchResult key={countryObject.country} countryName={countryObject.country}></SearchResult>;
-        })}
-      </div>
-    );
   }
 }
 
