@@ -4,6 +4,13 @@
   grid-template-rows: 10% [working-area-top] 25% auto 25% [working-area-bottom] 10%;
 }
 
+#title {
+  text-align: center;
+  font-size: 500%;
+  padding: 10px;
+  font-family: "Dancing Script", cursive;
+}
+
 .working-area {
   grid-column-start: working-area-leading;
   grid-column-end: working-area-trailing;
