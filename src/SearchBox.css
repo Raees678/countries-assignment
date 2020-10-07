@@ -1,0 +1,7 @@
+#search-box-form-div-input {
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  padding: 10px;
+  width: 100%;
+  font-size: 1vw;
+}
