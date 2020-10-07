@@ -1,0 +1,14 @@
+.search-result {
+  background-color: white;
+  cursor: pointer;
+}
+
+.search-result:hover {
+  background: #fae9c3;
+}
+
+.search-result-text {
+  padding: 1%;
+  font-size: 1vw;
+  margin: 0;
+}

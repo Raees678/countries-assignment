@@ -4,7 +4,6 @@ import "./SearchBox.css";
 class SearchBox extends React.Component {
   constructor(props) {
     super(props);
-
     this.handleSearchTextChange = this.handleSearchTextChange.bind(this);
   }
 
