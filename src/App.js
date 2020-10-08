@@ -16,6 +16,7 @@ class App extends React.Component {
       highlightedCoutryMatched: null,
       showingModal: false,
       modalCountryObject: null,
+      showingSettings: false,
     };
 
     this.handleSearchTextChange = this.handleSearchTextChange.bind(this);
@@ -24,6 +25,9 @@ class App extends React.Component {
     this.getCountriesMatched = this.getCountriesMatched.bind(this);
     this.handleKeyDown = this.handleKeyDown.bind(this);
     this.handleMouseOverHighlight = this.handleMouseOverHighlight.bind(this);
+    this.handleRateLimitChange = this.handleRateLimitChange.bind(this);
+    this.handleSearchDelayChange = this.handleSearchDelayChange.bind(this);
+    this.handleShowingSettingsChange = this.handleShowingSettingsChange.bind(this);
 
     this.countries = require("../node_modules/country-json/src/country-by-capital-city.json");
     this.rateLimit = 1000;
@@ -132,6 +136,20 @@ class App extends React.Component {
     }, this.searchDelay);
   }
 
+  handleRateLimitChange(event) {
+    this.rateLimit = event.target.value;
+  }
+
+  handleSearchDelayChange(event) {
+    this.searchDelay = event.target.value;
+  }
+
+  handleShowingSettingsChange() {
+    this.setState({
+      showingSettings: !this.state.showingSettings,
+    });
+  }
+
   render() {
     return (
       <div className="App" onKeyDown={this.handleKeyDown} tabIndex="1">
@@ -152,6 +170,39 @@ class App extends React.Component {
             onMouseOverHighlight={this.handleMouseOverHighlight}
           ></SearchResultsBox>
         </div>
+        <div className="easter-egg">
+          {this.state.showingSettings && (
+            <div>
+              <div className="slidecontainer">
+                <label htmlFor="rate_limit_range">Rate Limit Range</label>
+                <input
+                  type="range"
+                  min="0"
+                  max="5000"
+                  defaultValue="1000"
+                  className="slider"
+                  id="rate_limit_range"
+                  onChange={this.handleRateLimitChange}
+                ></input>
+                <label htmlFor="search_delay_range">Search Delay Range</label>
+                <input
+                  type="range"
+                  min="0"
+                  max="5000"
+                  defaultValue="1000"
+                  className="slider"
+                  id="search_delay_range"
+                  onChange={this.handleSearchDelayChange}
+                ></input>
+              </div>
+              <div className="slidecontainer"></div>
+            </div>
+          )}
+          <span role="img" aria-label="easter-egg" onClick={this.handleShowingSettingsChange}>
+            ⚙️
+          </span>
+        </div>
+
         {this.state.showingModal === true && (
           <Modal countryObject={this.state.modalCountryObject} onCloseButtonClick={this.handleCloseButtonClick}></Modal>
         )}
