@@ -143,7 +143,12 @@ class App extends React.Component {
         <div className="working-area">
           <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500&display=swap" rel="stylesheet" />
           <div id="title">Country Search</div>
-          <SearchBox searchText={this.state.searchText} onSearchTextChange={this.handleSearchTextChange}></SearchBox>
+          <SearchBox
+            countriesMatchedLoading={this.state.countriesMatchedLoading}
+            searchText={this.state.searchText}
+            onSearchTextChange={this.handleSearchTextChange}
+          ></SearchBox>
+          <div className="clearing-div"></div>
           <SearchResultsBox
             onSearchResultClick={this.handleSearchResultClick}
             countriesMatchedLoading={this.state.countriesMatchedLoading}

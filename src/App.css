@@ -17,3 +17,7 @@
   grid-row-start: working-area-top;
   grid-row-end: working-area-bottom;
 }
+
+.clearing-div {
+  clear: both;
+}

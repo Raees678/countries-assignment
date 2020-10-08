@@ -4,6 +4,7 @@
   overflow: scroll;
   max-height: 40.8vh;
   background-color: white;
+  float: none !important;
 }
 
 #results-footer {

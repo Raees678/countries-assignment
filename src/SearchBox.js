@@ -1,5 +1,6 @@
 import React from "react";
 import "./SearchBox.css";
+import Spinner from "./Spinner";
 
 class SearchBox extends React.Component {
   constructor(props) {
@@ -22,6 +23,12 @@ class SearchBox extends React.Component {
             onChange={this.handleSearchTextChange}
           ></input>
         </form>
+
+        {this.props.countriesMatchedLoading && (
+          <div id="spinner_container">
+            <Spinner></Spinner>
+          </div>
+        )}
       </div>
     );
   }
