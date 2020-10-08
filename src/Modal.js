@@ -7,10 +7,14 @@ class Modal extends React.Component {
     this.handleCloseButtonClick = this.handleCloseButtonClick.bind(this);
   }
 
+  // call the close button clicked function in App.js
+  // lets it know to toggle the state so that the Modal's parent does not render it
   handleCloseButtonClick(event) {
     this.props.onCloseButtonClick();
   }
 
+  // CSS using absolute positioning, with a z-index above regular content,
+  // so it shows above the search bar and its content
   render() {
     return (
       <div id="modal">

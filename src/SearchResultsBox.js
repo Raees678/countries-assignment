@@ -12,6 +12,12 @@ class SearchResultsBox extends React.Component {
     this.searchResultRef = React.createRef();
   }
 
+  // renders a list of searchResults
+  // a highlighted property is used to indicate that a given SearchResult must be highlighted
+  // if a SearchResult has the same index as the highlightedCountryMatched, then highlighted is true and the given  SearchResult is highlighted
+  // occasionally a SearchResult may want to add the highlighted class to itself when it ismoused over
+  // so we also pass to the SearchResult object its index in the list of countries being rendered
+  // that way it may call a function in App.js and set the state of the highlightedCountryMatched which decides which country is  highlighted
   render() {
     return (
       <div id="search-results-box" style={{ maxHeight: this.state.height }}>

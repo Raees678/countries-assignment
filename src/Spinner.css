@@ -1,3 +1,4 @@
+/* Just an empty div with border-radius to 50% to  make it a hollow circle, that spins using webkit animations */
 .spinner {
   display: inline-block;
   margin-top: 10px;

@@ -12,6 +12,8 @@ class SearchBox extends React.Component {
     this.props.onSearchTextChange(event.target.value);
   }
 
+  // shows a search bar and if given the prop for countriesMatchedLoading, shows a Spinner
+  // side by side horizontally, using Flexbox CSS layout
   render() {
     return (
       <div id="search-box">

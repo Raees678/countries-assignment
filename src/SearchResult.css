@@ -7,6 +7,7 @@
   margin: 1vh;
 }
 
+/* when a hover class is added the background color changes to give the appearance of highlighting the result */
 .hover {
   background: #fbe09d !important;
   border-radius: 3px;
