@@ -8,6 +8,8 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      height: window.innerHeight,
+      width: window.innerWidth,
       searchText: "",
       countriesMatched: [],
       countriesMatchedLoading: false,

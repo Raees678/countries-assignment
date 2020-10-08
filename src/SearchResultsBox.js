@@ -7,12 +7,12 @@ class SearchResultsBox extends React.Component {
     super(props);
     this.state = {
       highlightedSearchResultIndex: 0,
+      height: null,
     };
+    this.searchResultRef = React.createRef();
   }
 
   render() {
-    var height = 0;
-
     if (this.props.countriesMatchedLoading === true) {
       return (
         <div id="search-results-box">
@@ -21,20 +21,21 @@ class SearchResultsBox extends React.Component {
       );
     } else {
       return (
-        <div id="search-results-box">
+        <div id="search-results-box" style={{ maxHeight: this.state.height }}>
           {this.props.countriesMatched.map(function (countryObject, index) {
             return (
-              <div>
+              <div key={index}>
                 <SearchResult
                   onSearchResultClick={this.props.onSearchResultClick}
                   highlighted={this.props.highlightedCoutryMatched === index}
-                  key={index}
                   index={index}
                   countryObject={countryObject}
                   onMouseOverHighlight={this.props.onMouseOverHighlight}
                 ></SearchResult>
                 {index === this.props.countriesMatched.length - 1 && (
-                  <div id="results-footer">{this.props.countriesMatched.length} results found</div>
+                  <div key="search-results-count" id="results-footer">
+                    {this.props.countriesMatched.length} results found
+                  </div>
                 )}
               </div>
             );

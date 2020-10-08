@@ -1,8 +1,8 @@
 #search-results-box {
-  border-color: black;
-  border-width: 10px;
+  border-bottom-left-radius: 1%;
+  border-bottom-right-radius: 1%;
   overflow: scroll;
-  max-height: 400px;
+  max-height: 35vh;
   background-color: white;
 }
 

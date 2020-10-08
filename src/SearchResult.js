@@ -4,14 +4,14 @@ import "./SearchResult.css";
 class SearchResult extends React.Component {
   constructor(props) {
     super(props);
-    this.myRef = React.createRef();
+    this.searchResultRef = React.createRef();
     this.handleSearchResultClick = this.handleSearchResultClick.bind(this);
     this.handleMouseOverHighlight = this.handleMouseOverHighlight.bind(this);
   }
 
   componentDidUpdate() {
-    if (this.myRef.current && this.props.highlighted === true) {
-      this.myRef.current.scrollIntoView({ behavior: "auto", block: "nearest", inline: "center" });
+    if (this.searchResultRef.current && this.props.highlighted === true) {
+      this.searchResultRef.current.scrollIntoView({ behavior: "auto", block: "nearest", inline: "center" });
     }
   }
 
@@ -27,7 +27,7 @@ class SearchResult extends React.Component {
     return (
       <div
         className={this.props.highlighted === true ? "search-result hover" : "search-result"}
-        ref={this.myRef}
+        ref={this.searchResultRef}
         onMouseOver={this.handleMouseOverHighlight}
       >
         <p onClick={this.handleSearchResultClick} className="search-result-text">

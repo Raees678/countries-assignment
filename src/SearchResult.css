@@ -1,6 +1,7 @@
 .search-result {
   background-color: white;
   cursor: pointer;
+  height: 7vh;
 }
 
 .hover {
