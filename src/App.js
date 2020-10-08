@@ -26,31 +26,24 @@ class App extends React.Component {
     this.handleMouseOverHighlight = this.handleMouseOverHighlight.bind(this);
 
     this.countries = require("../node_modules/country-json/src/country-by-capital-city.json");
-    this.rateLimit = 1000;
+    this.rateLimit = 0;
     this.rateLimited = false;
-    this.updatedStringDuringRateLimit = null;
+    this.rateLimitCallback = null;
     this.searchDelay = 1000;
+    this.searchDelayCallback = null;
   }
 
   handleSearchTextChange(searchText) {
-    if (this.rateLimited === false) {
-      this.rateLimited = true;
-      var newThis = this;
-      setTimeout(function () {
-        newThis.rateLimited = false;
-        if (newThis.updatedStringDuringRateLimit !== null) {
-          const updatedString = newThis.updatedStringDuringRateLimit;
-          newThis.updatedStringDuringRateLimit = null;
-          newThis.handleSearchTextChange(updatedString);
-        }
-      }, this.rateLimit);
-      this.setState({
+    clearTimeout(this.rateLimitCallback);
+    this.rateLimited = true;
+    var newThis = this;
+    this.rateLimitCallback = setTimeout(function () {
+      newThis.setState({
         searchText: searchText,
       });
-      this.getCountriesMatched(searchText);
-    } else {
-      this.updatedStringDuringRateLimit = searchText;
-    }
+      newThis.getCountriesMatched(searchText);
+      newThis.rateLimited = false;
+    }, this.rateLimit);
   }
 
   handleSearchResultClick(countryObject) {
@@ -103,8 +96,10 @@ class App extends React.Component {
       countriesMatchedLoading: true,
       highlightedCoutryMatched: null,
     });
+    clearTimeout(this.searchDelayCallback);
+
     var newThis = this;
-    setTimeout(function () {
+    this.searchDelayCallback = setTimeout(function () {
       if (searchText !== "") {
         let countriesMatched = newThis.countries.filter(function (countryObject) {
           return countryObject.country.toLowerCase().includes(searchText.toLowerCase());

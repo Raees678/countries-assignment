@@ -20,7 +20,6 @@ class SearchResult extends React.Component {
   }
 
   handleMouseOverHighlight(event) {
-    console.log("mouse over search-result");
     this.props.onMouseOverHighlight(this.props.index);
   }
 
