@@ -26,7 +26,7 @@ class App extends React.Component {
     this.handleMouseOverHighlight = this.handleMouseOverHighlight.bind(this);
 
     this.countries = require("../node_modules/country-json/src/country-by-capital-city.json");
-    this.rateLimit = 0;
+    this.rateLimit = 1000;
     this.rateLimited = false;
     this.rateLimitCallback = null;
     this.searchDelay = 1000;
