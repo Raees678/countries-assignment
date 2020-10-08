@@ -3,8 +3,8 @@
   cursor: pointer;
 }
 
-.search-result:hover {
-  background: #fae9c3;
+.hover {
+  background: #fbe09d !important;
 }
 
 .search-result-text {

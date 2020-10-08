@@ -2,7 +2,7 @@
   border-color: black;
   border-width: 10px;
   overflow: scroll;
-  max-height: 500px;
+  max-height: 400px;
   background-color: white;
 }
 
@@ -27,4 +27,10 @@
   100% {
     transform: rotate(315deg);
   }
+}
+
+#results-footer {
+  font-size: small;
+  text-align: center;
+  font-weight: bold;
 }
