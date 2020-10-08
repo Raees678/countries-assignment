@@ -1,6 +1,7 @@
 import React from "react";
 import SearchResult from "./SearchResult";
 import "./SearchResultsBox.css";
+import Spinner from "./Spinner";
 
 class SearchResultsBox extends React.Component {
   constructor(props) {
@@ -16,7 +17,7 @@ class SearchResultsBox extends React.Component {
     if (this.props.countriesMatchedLoading === true) {
       return (
         <div id="search-results-box">
-          <div className="spinner"></div>
+          <Spinner></Spinner>
         </div>
       );
     } else {

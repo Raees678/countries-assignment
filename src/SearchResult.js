@@ -20,6 +20,7 @@ class SearchResult extends React.Component {
   }
 
   handleMouseOverHighlight(event) {
+    console.log("mouse over search-result");
     this.props.onMouseOverHighlight(this.props.index);
   }
 
@@ -29,10 +30,9 @@ class SearchResult extends React.Component {
         className={this.props.highlighted === true ? "search-result hover" : "search-result"}
         ref={this.searchResultRef}
         onMouseOver={this.handleMouseOverHighlight}
+        onClick={this.handleSearchResultClick}
       >
-        <p onClick={this.handleSearchResultClick} className="search-result-text">
-          {this.props.countryObject.country}
-        </p>
+        <p className="search-result-text">{this.props.countryObject.country}</p>
       </div>
     );
   }

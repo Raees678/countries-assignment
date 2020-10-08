@@ -2,13 +2,18 @@
   background-color: white;
   cursor: pointer;
   height: 7vh;
+  line-height: 7vh;
+  vertical-align: middle;
+  margin: 1vh;
 }
 
 .hover {
   background: #fbe09d !important;
+  border-radius: 3px;
 }
 
 .search-result-text {
-  padding: 1%;
+  display: inline;
+  padding-left: 1.7%;
   margin: 0;
 }
